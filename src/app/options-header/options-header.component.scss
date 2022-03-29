@@ -1,0 +1,66 @@
+/******************************************************************************/
+/*  File: options-header.component.scss                                       */
+/*  Date: 29/03/2022                                                          */
+/*  Author: Jbristhuille                                                      */
+/*                                                                            */
+/*  Description: Options header styles                                        */
+/******************************************************************************/
+
+/* SUMMARY
+* Buttons container
+* Rebind panel
+*/
+
+#option-header-container {
+  /* Buttons container */
+  .buttons-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 10px;
+
+    .button {
+      width: 50px;
+      height: 30px;
+      border: solid 1px black;
+      margin-right: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &.active {
+        background: green;
+      }
+    }
+
+    .pressed-buttons-list {
+      margin-left: 10px;
+    }
+  }
+  /***/
+
+  /* Rebind panel */
+  .buttons-rebind {
+    margin-top: 10px;
+    display: grid;
+    align-items: center;
+
+    div {
+      margin-bottom: 5px;
+      display: grid;
+      align-items: center;
+      grid-template-columns: 50px 1fr;
+      grid-gap: 5px;
+
+      input {
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      button {
+        margin: 0;
+      }
+    }
+  }
+  /***/
+}

@@ -1,0 +1,44 @@
+<!----------------------------------------------------------------------------->
+<!--  File: options-header.component.html                                    -->
+<!--  Date: 29/03/2022                                                       -->
+<!--  Author: Jbristhuille                                                   -->
+<!--                                                                         -->
+<!--  Description: Option zone template, manage controller and game options  -->
+<!----------------------------------------------------------------------------->
+
+<!-- SUMMARY
+-->
+
+<div id="option-header-container">
+  <select [(ngModel)]="gm.used">
+    <option *ngFor="let gamepad of gm.gamepads"
+            [ngValue]="gamepad">
+      {{gamepad.id}}
+    </option>
+  </select>
+
+  <div class="buttons-container">
+    <div  *ngFor="let button of gm.buttonList"
+          [ngClass]="{
+            'button': true,
+            'active': gm.isPressed(button)
+          }">
+      {{button.name}}
+    </div>
+
+    <button (click)="gm.onRebind = !gm.onRebind">Configure</button>
+
+    <div class="pressed-buttons-list">
+      Current pressed buttons: {{gm.printPressed()}}
+    </div>
+  </div>
+
+  <div class="buttons-rebind" *ngIf="gm.onRebind">
+    <div *ngFor="let button of gm.buttonList">
+      <div>{{button.name}}</div>
+      <input type="text" [(ngModel)]="button.cmd" (keydown.enter)="gm.onRebind = false">
+    </div>
+
+    <button (click)="gm.onRebind = false">Save</button>
+  </div>
+</div>
