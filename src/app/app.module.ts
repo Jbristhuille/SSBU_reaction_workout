@@ -21,12 +21,14 @@ import { FormsModule } from '@angular/forms';
 /* Components */
 import { AppComponent } from './app.component';
 import { OptionsHeaderComponent } from './options-header/options-header.component';
+import { PlayZoneComponent } from './play-zone/play-zone.component';
 /***/
 
 @NgModule({
   declarations: [
     AppComponent,
-    OptionsHeaderComponent
+    OptionsHeaderComponent,
+    PlayZoneComponent
   ],
   imports: [
     BrowserModule,

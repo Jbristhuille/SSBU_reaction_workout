@@ -1,0 +1,28 @@
+<!----------------------------------------------------------------------------->
+<!--  File: play-zone.component.html                                         -->
+<!--  Date: 28/03/2022                                                       -->
+<!--  Author: Jbristhuille                                                   -->
+<!--                                                                         -->
+<!--  Description: Play zone template, manage game mecanisms                 -->
+<!----------------------------------------------------------------------------->
+
+<!-- SUMMARY
+-->
+
+<div  id="play-zone-container"
+      [ngClass]="{'success': inputRet, 'fail': inputRet === false}">
+  <button *ngIf="!isPlaying"
+          (click)="launchGame()">
+    Play
+  </button>
+
+  <div  class="countdown-text"
+        *ngIf="timeBeforePlay != 0 && isPlaying">
+    {{timeBeforePlay}}
+  </div>
+
+  <div  class="waited-input"
+        *ngIf="timeBeforePlay <= 0 && awaitedButton">
+    {{awaitedButton.name}}
+  </div>
+</div>

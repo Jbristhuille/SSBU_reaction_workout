@@ -8,6 +8,7 @@
 
 /* SUMMARY
   * Angular
+  * Services
 */
 
 /* Angular */

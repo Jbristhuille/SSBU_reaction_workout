@@ -13,6 +13,7 @@
   * Name: loop
   * Name: isPressed
   * Name: printPressed
+  * Name: isPressedTimeout
 */
 
 /* Angular */
@@ -98,8 +99,6 @@ export class GamepadManagerService {
 
     if (this.currentState && this.currentState.buttons) {
       for (let i = 0; i < this.currentState.buttons.length; i++) {
-        console.log(this.currentState.buttons[i]); // DEBUG
-
         if (this.currentState.buttons[i] && this.currentState.buttons[i].pressed)
           ret.push(i);
       }
@@ -113,12 +112,53 @@ export class GamepadManagerService {
   * Name: isPressed
   * Description: Check if button is pressed
   *
+  * Args:
+  * - button (Object): Button to check
+  *
   * Return (Boolean): True if target button is pressed
   */
   public isPressed(button: any) {
     if (this.currentState && button)
       return this.currentState.buttons[button.cmd].pressed;
     else return false;
+  }
+  /***/
+
+  /*
+  * Name: isPressedTimeout
+  * Description: Check if button is pressed on time
+  *
+  * Args:
+  * - button (Object): Button to check
+  * - timeout (Number): Time before fail
+  *
+  * Return (Promise): Trigger while time over or input
+  */
+  public isPressedTimeout(button: any, timeout: number): Promise<void> {
+    return new Promise((resolve, reject) => {
+      let loopTime = 1;
+      let count = 0;
+
+      let inter = setInterval(() => {
+        count += loopTime;
+        let pressedButton = this.printPressed();
+
+        if (pressedButton[0] !== undefined) {
+          if (pressedButton[0] == button.cmd) { // Success
+            clearInterval(inter);
+            return resolve();
+          } else { // Wrong input
+            clearInterval(inter);
+            return reject();
+          }
+        }
+
+        if (count >= timeout) { // Fail, timeout reached
+          clearInterval(inter);
+          return reject();
+        }
+      }, loopTime);
+    });
   }
   /***/
 }
