@@ -17,6 +17,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
   transition: background ease 0.4s;
 
   &.success {
@@ -34,5 +35,11 @@
   .waited-input {
     font-size: 18px;
     text-transform: uppercase;
+  }
+
+  .results {
+    display: grid;
+    width: 100%;
+    justify-content: center;
   }
 }

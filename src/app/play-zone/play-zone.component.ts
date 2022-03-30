@@ -10,6 +10,7 @@
   * Angular
   * Services
   * Name: launchGame
+  * Name: saveStepResult
   * Name: startGameTimer
   * Name: inputStart
 */
@@ -20,6 +21,10 @@ import { Component, OnInit } from '@angular/core';
 
 /* Services */
 import { GamepadManagerService } from '../services/gamepadManager/gamepad-manager.service';
+/***/
+
+/* Node modules */
+import * as _ from "lodash";
 /***/
 
 @Component({
@@ -33,10 +38,13 @@ export class PlayZoneComponent implements OnInit {
 
   public inputRet: any = null;
   public awaitedButton: any;
+  public results: any[] = [];
+  public endGame: any;
 
-  private maxTime = 3000;
-  private minTime = 500;
-  private timeout = 500;
+  public steps: number = 10;
+  private maxTime: number = 3000;
+  private minTime: number = 500;
+  private timeout: number = 500;
 
   constructor(public gm: GamepadManagerService) {
   }
@@ -48,11 +56,13 @@ export class PlayZoneComponent implements OnInit {
   * Name: launchGame
   * Description: Start game
   */
-  public async launchGame() {
+  public async launchGame(): Promise<void> {
     this.isPlaying = true;
+    this.results = [];
+    this.endGame = null;
     await this.startGameTimer();
 
-    for (var i = 0; i < 10; i++) { // Game loop
+    for (var i = 0; i < this.steps; i++) { // Game loop
       let inputTiming = Math.random() * (this.maxTime - this.minTime) + this.minTime; // Define input timing
       let waitButton = this.gm.buttonList[Math.floor(Math.random() * this.gm.buttonList.length)]; // Get random button in list
 
@@ -60,19 +70,61 @@ export class PlayZoneComponent implements OnInit {
         this.awaitedButton = waitButton;
       }, inputTiming);
 
+      let start = Date.now();
       this.inputRet = await this.inputStart(inputTiming, waitButton, this.timeout); // Start input action
 
-      // Success/fail process (to do)
       this.awaitedButton = null;
-
-      setTimeout(() => {
-        this.inputRet = null;
-      }, 200);
+      this.saveStepResult(start);
     }
+
+    this.computeResult();
 
     // Reset game
     this.isPlaying = false;
     this.timeBeforePlay = 3;
+  }
+  /***/
+
+  /*
+  * Name: saveStepResult
+  * Description: Save step
+  *
+  * Args:
+  * - startTime (Number): Step start
+  */
+  private saveStepResult(startTime: number): void {
+    this.results.push({
+      success: this.inputRet,
+      time: (Date.now() - startTime) / 1000 // save in seconds
+    });
+
+    setTimeout(() => {
+      this.inputRet = null;
+    }, 200);
+  }
+  /***/
+
+  /*
+  * Name: computeResult
+  * Description: Compute definive results
+  */
+  private computeResult(): void {
+    let tmp = _.filter(this.results, (r) => {
+      return r.success;
+    });
+
+    tmp = _.sortBy(tmp, (a: any) => {
+      return a.time;
+    });
+
+    this.endGame = {
+      success: tmp.length,
+      fails: this.steps - tmp.length,
+      best: tmp[0].time.toFixed(3),
+      worse: tmp[tmp.length-1].time.toFixed(3),
+      median: tmp[Math.floor(tmp.length/2)-1].time.toFixed(3),
+      average: _.meanBy(tmp, (r) => r.time).toFixed(3)
+    };
   }
   /***/
 

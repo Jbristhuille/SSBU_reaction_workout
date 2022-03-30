@@ -25,4 +25,13 @@
         *ngIf="timeBeforePlay <= 0 && awaitedButton">
     {{awaitedButton.name}}
   </div>
+
+  <div class="results" *ngIf="endGame && !isPlaying">
+    <div>Success: {{endGame.success}}/{{this.steps}}</div>
+    <div>Fails: {{endGame.fails}}/{{this.steps}}</div>
+    <div>Best: {{endGame.best}}s</div>
+    <div>Worse: {{endGame.worse}}s</div>
+    <div>Median: {{endGame.median}}s</div>
+    <div>Average: {{endGame.average}}s</div>
+  </div>
 </div>
