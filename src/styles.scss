@@ -1,1 +1,51 @@
-/* You can add global styles to this file, and also import other style files */
+/******************************************************************************/
+/*  File: styles: .scss;                                                      */
+/*  Date: 01/04/2022                                                          */
+/*  Author: Jbristhuille                                                      */
+/*                                                                            */
+/*  Description: Global styles sheet                                          */
+/******************************************************************************/
+
+/* SUMMARY
+  * Fonts
+  * Background
+*/
+
+/* Fonts */
+@font-face {
+  font-family: "SansSerifShaded";
+  src: url("/assets/fonts/SansSerifShaded.ttf");
+}
+
+@font-face {
+  font-family: "PaletteMosaicRegular";
+  src: url("/assets/fonts/PaletteMosaic-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Clip";
+  src: url("/assets/fonts/Clip.ttf");
+}
+
+/***/
+
+/* Background */
+html {
+  background: no-repeat url("/assets/img/background.jpg");
+  background-position: center;
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  padding: 10px;
+  box-sizing: border-box;
+}
+/***/
+
+h1 {
+  font-family: Clip;
+  font-size: 4em;
+  color: #ffbd01;
+  text-shadow: 1px 1px 3px rgb(0 0 0 / 80%);
+  margin-top: 20px;
+  margin-bottom: 20px;
+}

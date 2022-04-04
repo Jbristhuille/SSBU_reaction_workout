@@ -13,7 +13,7 @@
       [ngClass]="{'success': inputRet, 'fail': inputRet === false}">
   <button *ngIf="!isPlaying"
           (click)="launchGame()">
-    Play
+    Play !
   </button>
 
   <div  class="countdown-text"
@@ -23,15 +23,39 @@
 
   <div  class="waited-input"
         *ngIf="timeBeforePlay <= 0 && awaitedButton">
-    {{awaitedButton.name}}
+    <img src="/assets/img/smash_{{awaitedButton.name}}.svg" alt="{{awaitedButton.name}}">
+    <span [style.color]="awaitedButton.color">{{awaitedButton.name}}</span>
   </div>
 
-  <div class="results" *ngIf="endGame && !isPlaying">
-    <div>Success: {{endGame.success}}/{{this.steps}}</div>
-    <div>Fails: {{endGame.fails}}/{{this.steps}}</div>
-    <div>Best: {{endGame.best}}s</div>
-    <div>Worse: {{endGame.worse}}s</div>
-    <div>Median: {{endGame.median}}s</div>
-    <div>Average: {{endGame.average}}s</div>
+  <div class="results-modal" *ngIf="endGame && !isPlaying">
+    <div>
+      <div>Success: </div>
+      <div>{{endGame.success}}/{{this.steps}}</div>
+    </div>
+
+    <div>
+      <div>Fails: </div>
+      <div>{{endGame.fails}}/{{this.steps}}</div>
+    </div>
+
+    <div>
+      <div>Best: </div>
+      <div>{{endGame.best}}s</div>
+    </div>
+
+    <div>
+      <div>Worse: </div>
+      <div>{{endGame.worse}}s</div>
+    </div>
+
+    <div>
+      <div>Median: </div>
+      <div>{{endGame.median}}s</div>
+    </div>
+
+    <div>
+      <div>Average: </div>
+      <div>{{endGame.average}}s</div>
+    </div>
   </div>
 </div>

@@ -12,6 +12,11 @@
 */
 
 #option-header-container {
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  border-radius: 3px;
+
   /* Buttons container */
   .buttons-container {
     display: flex;
@@ -20,16 +25,30 @@
     margin-top: 10px;
 
     .button {
-      width: 50px;
-      height: 30px;
-      border: solid 1px black;
-      margin-right: 5px;
-      display: flex;
+      display: grid;
+      grid-template-columns: 70px;
       align-items: center;
       justify-content: center;
+      grid-gap: 5px;
+      margin-right: 10px;
+      opacity: 0.5;
+
+      img {
+        width: 50px;
+        margin: auto;
+        box-shadow: 1px 1px 5px black;
+        border-radius: 100%;
+      }
+
+      span {
+        margin: auto;
+        text-transform: capitalize;
+        text-shadow: 1px 1px 2px black;
+        font-family: PaletteMosaicRegular;
+      }
 
       &.active {
-        background: green;
+        opacity: 1;
       }
     }
 
@@ -44,18 +63,18 @@
     margin-top: 10px;
     display: grid;
     align-items: center;
+    box-sizing: border-box;
+    width: 100%;
+    overflow: hidden;
 
     div {
       margin-bottom: 5px;
       display: grid;
       align-items: center;
-      grid-template-columns: 50px 1fr;
+      grid-template-columns: 50px minmax(0, 1fr);
       grid-gap: 5px;
-
-      input {
-        width: 100%;
-        box-sizing: border-box;
-      }
+      box-sizing: border-box;
+      text-transform: capitalize;
 
       button {
         margin: 0;

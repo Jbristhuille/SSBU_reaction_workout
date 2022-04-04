@@ -29,16 +29,16 @@ import * as _ from 'lodash';
 })
 export class GamepadManagerService {
   public gamepads: any[] = [];
-  public used: any = {};
+  public used: any;
   public currentState: any;
 
   public onRebind: boolean = false;
   public buttonList: any[] = [
-    {name: 'shield', cmd: 7},
-    {name: 'jump', cmd: 2},
-    {name: 'grab', cmd: 5},
-    {name: 'attack', cmd: 1},
-    {name: 'special', cmd: 0}
+    {name: 'shield', cmd: 7, color: "#38A7DC"},
+    {name: 'jump', cmd: 2, color: "#FCC531"},
+    {name: 'grab', cmd: 5, color: "#3DAB44"},
+    {name: 'attack', cmd: 1, color: "#E62B2A"},
+    {name: 'special', cmd: 0, color: "#73006B"}
   ];
 
   private checkTime: number = 10;

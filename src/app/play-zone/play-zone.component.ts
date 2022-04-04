@@ -65,12 +65,13 @@ export class PlayZoneComponent implements OnInit {
     for (var i = 0; i < this.steps; i++) { // Game loop
       let inputTiming = Math.random() * (this.maxTime - this.minTime) + this.minTime; // Define input timing
       let waitButton = this.gm.buttonList[Math.floor(Math.random() * this.gm.buttonList.length)]; // Get random button in list
+      let start = 0;
 
       setTimeout(() => { // Print button to input
+        start =  Date.now();
         this.awaitedButton = waitButton;
       }, inputTiming);
 
-      let start = Date.now();
       this.inputRet = await this.inputStart(inputTiming, waitButton, this.timeout); // Start input action
 
       this.awaitedButton = null;

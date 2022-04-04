@@ -11,6 +11,10 @@
 
 <div id="option-header-container">
   <select [(ngModel)]="gm.used">
+    <option [ngValue]="undefined" disabled>
+      -- Gamepad selection --
+    </option>
+
     <option *ngFor="let gamepad of gm.gamepads"
             [ngValue]="gamepad">
       {{gamepad.id}}
@@ -23,7 +27,8 @@
             'button': true,
             'active': gm.isPressed(button)
           }">
-      {{button.name}}
+      <img src="/assets/img/smash_{{button.name}}.svg" alt="{{button.name}}">
+      <span [style.color]="button.color">{{button.name}}</span>
     </div>
 
     <button (click)="gm.onRebind = !gm.onRebind">Configure</button>
@@ -39,6 +44,6 @@
       <input type="text" [(ngModel)]="button.cmd" (keydown.enter)="gm.onRebind = false">
     </div>
 
-    <button (click)="gm.onRebind = false">Save</button>
+    <button (click)="gm.onRebind = false">Confirm</button>
   </div>
 </div>

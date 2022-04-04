@@ -7,19 +7,26 @@
 /******************************************************************************/
 
 /* SUMMARY
+  * Indicators
+  * Game text and icons
+  * Play button
+  * Results
 */
 
 #play-zone-container {
-  border: solid 1px black;
   width: 100%;
   height: 500px;
   margin-top: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
+  flex-direction: column;
   transition: background ease 0.4s;
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+  border-radius: 3px;
 
+  /* Indicators */
   &.success {
     background: green;
   }
@@ -27,19 +34,80 @@
   &.fail {
     background: red;
   }
+  /***/
 
+  /* Game text and icons */
   .countdown-text {
-    font-size: 24px;
+    font-family: SansSerifShaded;
+    font-size: 100px;
   }
 
   .waited-input {
-    font-size: 18px;
-    text-transform: uppercase;
-  }
-
-  .results {
     display: grid;
-    width: 100%;
+    grid-template-columns: 100px;
+    grid-gap: 5px;
+    align-items: center;
     justify-content: center;
+
+    img, span {
+      margin: auto;
+    }
+
+    img {
+      border-radius: 100%;
+      box-shadow: 1px 1px 5px black;
+    }
+
+    span {
+      text-transform: capitalize;
+      font-family: PaletteMosaicRegular;
+      font-size: 24px;
+      text-shadow: 1px 1px 2px black;
+    }
   }
+  /***/
+
+  /* Play button */
+  button {
+    cursor: pointer;
+    background: #c42341;
+    transition: box-shadow ease 0.4s;
+    border-radius: 25px;
+    height: 50px;
+    width: 150px;
+    color: white;
+    border: solid 2px #c42341;
+    font-family: Clip;
+    font-size: 37px;
+    text-transform: uppercase;
+
+
+    &:hover {
+      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+    }
+  }
+  /***/
+
+  /* Results */
+  .results-modal {
+    max-width: 500px;
+    background: white;
+    border: solid 1px black;
+    border-radius: 5px;
+    padding: 10px;
+    display: grid;
+    grid-gap: 5px;
+    margin-top: 20px;
+
+    & > div {
+      display: grid;
+      grid-template-columns: 80px 100px;
+
+      div:last-child {
+        text-align: right;
+        position: relative;
+      }
+    }
+  }
+  /***/
 }
